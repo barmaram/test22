@@ -22,8 +22,8 @@
 
         <EditText
             android:id="@+id/etUserNameLF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="223dp"
+            android:layout_height="74dp"
             android:layout_marginTop="178dp"
             android:ems="10"
             android:hint="enter your username..."
@@ -34,8 +34,8 @@
 
         <EditText
             android:id="@+id/etPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="218dp"
+            android:layout_height="71dp"
             android:layout_marginTop="73dp"
             android:ems="10"
             android:hint="enter your password..."
