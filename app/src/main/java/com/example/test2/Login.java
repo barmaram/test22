@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +18,10 @@ import com.google.firebase.auth.AuthResult;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link maram#newInstance} factory method to
+ * Use the {@link Login#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class maram extends Fragment {
+public class Login extends Fragment {
       private EditText etUserName,etpassword;
     private Button buttonLogIn;
     private FirebaseServices fbs;
@@ -34,7 +35,7 @@ public class maram extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public maram() {
+    public Login() {
         // Required empty public constructor
     }
 
@@ -47,8 +48,8 @@ public class maram extends Fragment {
      * @return A new instance of fragment maram.
      */
     // TODO: Rename and change types and number of parameters
-    public static maram newInstance(String param1, String param2) {
-        maram fragment = new maram();
+    public static Login newInstance(String param1, String param2) {
+        Login fragment = new Login();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,7 +70,7 @@ public class maram extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_maram, container, false);
+        return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     @Override
@@ -103,5 +104,10 @@ public class maram extends Fragment {
 
         });
 
+    }
+    public void ForgotPassTrans(View view) {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FlMain, new Forgotpass());
+        ft.commit();
     }
 }

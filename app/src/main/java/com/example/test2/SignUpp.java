@@ -106,6 +106,7 @@ public class SignUpp extends Fragment {
     }
 
     private void connectComponents() {
+        fbs = FirebaseServices.getInstance();
         UserName=getView().findViewById(R.id.etEmailFragmentS);
         password=getView().findViewById(R.id.etPassWordFS);
         Tv=getView().findViewById(R.id.TvSignUp);
@@ -119,12 +120,15 @@ public class SignUpp extends Fragment {
                     Toast.makeText(getActivity(), "The Email isn't valid", Toast.LENGTH_SHORT).show();
                 if(!isValidPassword(pass) )
                     Toast.makeText(getActivity(), "The password isn't valid", Toast.LENGTH_SHORT).show();
-                fbs.getAuth().signInWithEmailAndPassword(user, pass).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                fbs.getAuth().createUserWithEmailAndPassword(user, pass).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
                         } else {
+
+
+
 
                         }
                     }
@@ -137,7 +141,7 @@ public class SignUpp extends Fragment {
 
     public void Logintrans(View view) {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.FlMain, new maram());
+        ft.replace(R.id.FlMain, new Login());
         ft.commit();
     }
 }
