@@ -110,6 +110,12 @@ public class SignUpp extends Fragment {
         UserName=getView().findViewById(R.id.etEmailFragmentS);
         password=getView().findViewById(R.id.etPassWordFS);
         Tv=getView().findViewById(R.id.TvSignUp);
+        Tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Logintrans();
+            }
+        });
         SignUp=getView().findViewById(R.id.buttonSignUp);
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,9 +133,6 @@ public class SignUpp extends Fragment {
 
                         } else {
 
-
-
-
                         }
                     }
                 });
@@ -139,7 +142,7 @@ public class SignUpp extends Fragment {
 
     }
 
-    public void Logintrans(View view) {
+    public void Logintrans() {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FlMain, new Login());
         ft.commit();

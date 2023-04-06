@@ -10,14 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvForgetPass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="forgot pass..."
-            tools:layout_editor_absoluteX="162dp"
-            tools:layout_editor_absoluteY="529dp" />
-
         <Button
             android:id="@+id/buttonLogIn"
             android:layout_width="wrap_content"
@@ -31,11 +23,13 @@
         <EditText
             android:id="@+id/etUserNameLF"
             android:layout_width="223dp"
-            android:layout_height="74dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="277dp"
             android:layout_marginTop="178dp"
             android:ems="10"
             android:hint="enter your username..."
             android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toTopOf="@+id/tvForgetPass"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,9 +41,19 @@
             android:layout_marginTop="73dp"
             android:ems="10"
             android:hint="enter your password..."
-            android:onClick="ForgotPassTrans"
             android:inputType="numberPassword"
+            android:onClick="ForgotPassTrans"
             app:layout_constraintStart_toStartOf="@+id/etUserNameLF"
+            app:layout_constraintTop_toBottomOf="@+id/etUserNameLF" />
+
+        <TextView
+            android:id="@+id/tvForgetPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="183dp"
+            android:text="forgot pass..."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/buttonLogIn"
             app:layout_constraintTop_toBottomOf="@+id/etUserNameLF" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

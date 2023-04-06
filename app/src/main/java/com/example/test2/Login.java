@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +26,7 @@ public class Login extends Fragment {
       private EditText etUserName,etpassword;
     private Button buttonLogIn;
     private FirebaseServices fbs;
+    private TextView tvForgetPassword;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,29 +85,36 @@ public class Login extends Fragment {
         etUserName=getView().findViewById(R.id.etUserNameLF);
         etpassword=getView().findViewById(R.id.etPassword);
         buttonLogIn=getView().findViewById(R.id.buttonLogIn);
-        buttonLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String user = etUserName.getText().toString();
-                String pass=etpassword.getText().toString();
-                fbs.getAuth().signInWithEmailAndPassword (user,pass)
-                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
+        tvForgetPassword=getView().findViewById(R.id.tvForgetPass);
+       tvForgetPassword.setOnClickListener(new View.OnClickListener() {
+                                                                  @Override
+                                                                  public void onClick(View view) {
+                                                                      ForgotPassTrans();
+                                                                  }
+                                                              });
+                buttonLogIn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String user = etUserName.getText().toString();
+                        String pass = etpassword.getText().toString();
+                        fbs.getAuth().signInWithEmailAndPassword(user, pass)
+                                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
 
-                                } else {
+                                        } else {
 
-                                }
-                            }
-                        });
+                                        }
+                                    }
+                                });
 
-            }
+                    }
 
-        });
+                });
 
     }
-    public void ForgotPassTrans(View view) {
+    public void ForgotPassTrans() {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FlMain, new Forgotpass());
         ft.commit();

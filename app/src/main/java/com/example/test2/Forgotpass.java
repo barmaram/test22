@@ -74,14 +74,20 @@ public class Forgotpass extends Fragment {
     }
     @Override
     public void onStart()
-    { super.onStart();
+    {
+        super.onStart();
       fbs =FirebaseServices.getInstance();
       etEmail =getView().findViewById(R.id.etEmail);
        buttonReset =getView().findViewById(R.id.buttonReset);
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(etEmail.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "There is no email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 fbs.getAuth().sendPasswordResetEmail(etEmail.getText().toString())
+
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
