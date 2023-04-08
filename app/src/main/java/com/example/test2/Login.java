@@ -78,10 +78,10 @@ public class Login extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        connectComponens();
+        connectComponents();
     }
 
-    private void connectComponens() {
+    private void connectComponents() {
         etUserName=getView().findViewById(R.id.etUserNameLF);
         etpassword=getView().findViewById(R.id.etPassword);
         buttonLogIn=getView().findViewById(R.id.buttonLogIn);

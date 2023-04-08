@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddClotheFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/etDesAddFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="64dp"
+            android:ems="10"
+            android:hint="description..."
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toTopOf="@+id/etNameAddFragment"
+            app:layout_constraintEnd_toEndOf="@+id/etNameAddFragment" />
+
+        <EditText
+            android:id="@+id/etSizeAddFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:ems="10"
+            android:hint="size"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="@+id/etDesAddFragment"
+            app:layout_constraintStart_toStartOf="@+id/etDesAddFragment"
+            app:layout_constraintTop_toBottomOf="@+id/etIdAddFragment" />
+
+        <EditText
+            android:id="@+id/etNameAddFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="89dp"
+            android:layout_marginBottom="250dp"
+            android:ems="10"
+            android:hint="name..."
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/buttonAddFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="51dp"
+            android:hint="Id..."
+            android:text="Add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etNameAddFragment" />
+
+        <EditText
+            android:id="@+id/etIdAddFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="114dp"
+            android:ems="10"
+            android:hint="Id..."
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@+id/etSizeAddFragment"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

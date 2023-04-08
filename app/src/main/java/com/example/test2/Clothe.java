@@ -1,0 +1,62 @@
+package com.example.test2;
+
+public class Clothe {
+    private String name;
+    private String size;
+    private double id;
+    private String description;
+
+    public Clothe() {
+    }
+
+    public Clothe(String name, String size, String description, double id) {
+        this.description=description;
+        this.name = name;
+        this.id=id;
+        this.size=size;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Clothes{" +
+                "name='" + name + '\'' +
+                ", size='" + size + '\'' +
+                ", id=" + id +
+                ", description='" + description + '\'' +
+                '}';
+    }
+}
