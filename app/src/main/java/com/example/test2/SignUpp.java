@@ -130,6 +130,9 @@ public class SignUpp extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.FlMain, new AddClotheFragment());
+                            ft.commit();
 
                         } else {
 

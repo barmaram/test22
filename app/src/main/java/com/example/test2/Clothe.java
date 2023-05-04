@@ -3,13 +3,13 @@ package com.example.test2;
 public class Clothe {
     private String name;
     private String size;
-    private double id;
+    private String id;
     private String description;
 
     public Clothe() {
     }
 
-    public Clothe(String name, String size, String description, double id) {
+    public Clothe(String name, String size, String description, String id) {
         this.description=description;
         this.name = name;
         this.id=id;
@@ -24,11 +24,11 @@ public class Clothe {
         this.description = description;
     }
 
-    public double getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

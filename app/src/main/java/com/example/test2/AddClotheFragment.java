@@ -96,11 +96,11 @@ public class AddClotheFragment extends Fragment {
     }
 
     private void AddtoFirestore() {
-        String Name, Size, Des;
-        double id;
+        String Name, Size, Des,id;
         Name = name.getText().toString();
         Size = size.getText().toString();
         Des = des.getText().toString();
+        id=Id.getText().toString();
         if (Name.trim().isEmpty() || Size.trim().isEmpty() || Des.trim().isEmpty()) {
             Toast.makeText(getActivity(), "SOME DATA IS MISSING!!", Toast.LENGTH_SHORT).show();
             return;
