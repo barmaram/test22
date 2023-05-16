@@ -1,13 +1,11 @@
 package com.example.test2;
 
 public class Clothe {
-    private String name;
-    private String size;
-    private String id;
-    private String description;
-
-    public Clothe() {
-    }
+     String name;
+     String size;
+     String id;
+    String description ;
+    public Clothe(){}
 
     public Clothe(String name, String size, String description, String id) {
         this.description=description;

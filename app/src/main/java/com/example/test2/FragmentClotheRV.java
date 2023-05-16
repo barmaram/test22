@@ -1,12 +1,25 @@
 package com.example.test2;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +27,12 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class FragmentClotheRV extends Fragment {
+    RecyclerView recyclerView;
+    ArrayList<Clothe> clotheArrayList;
+    Adapter MyAdapter;
+    FirebaseFirestore FF;
+    ProgressDialog progressDialog;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,12 +72,54 @@ public class FragmentClotheRV extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        recyclerView = getView().findViewById(R.id.ClotheRV);
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("fetching data .....");
+        progressDialog.show();
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        FF = FirebaseFirestore.getInstance();
+        clotheArrayList = new ArrayList<Clothe>();
+        MyAdapter = new Adapter(FragmentClotheRV.this, clotheArrayList);
+        EvenChangeListener();
+        recyclerView.setAdapter(MyAdapter);
+
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_clothe_r_v, container, false);
+
+    }
+
+    private void EvenChangeListener() {
+        FF.collection("Clothe")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        if (error != null) {
+                            if (progressDialog.isShowing())
+                                progressDialog.dismiss();
+                            Log.e("PireStore error", error.getMessage());
+                            return;
+                        }
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+                            if (dc.getType() == DocumentChange.Type.ADDED) {
+                                clotheArrayList.add(dc.getDocument().toObject(Clothe.class));
+                            }
+                            MyAdapter.notifyDataSetChanged();
+                            if (progressDialog.isShowing())
+                                progressDialog.dismiss();
+                        }
+                    }
+                });
+
+
     }
 }
