@@ -72,16 +72,16 @@ public class FragmentClotheRV extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        recyclerView = getView().findViewById(R.id.ClotheRV);
-        ProgressDialog progressDialog = new ProgressDialog(this);
+                recyclerView = getView().findViewById(R.id.ClotheRV);
+        /*ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("fetching data .....");
-        progressDialog.show();
+        progressDialog.show();*/
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         FF = FirebaseFirestore.getInstance();
         clotheArrayList = new ArrayList<Clothe>();
-        MyAdapter = new Adapter(FragmentClotheRV.this, clotheArrayList);
+        MyAdapter = new Adapter(getActivity(), clotheArrayList);
         EvenChangeListener();
         recyclerView.setAdapter(MyAdapter);
 
@@ -106,7 +106,7 @@ public class FragmentClotheRV extends Fragment {
                         if (error != null) {
                             if (progressDialog.isShowing())
                                 progressDialog.dismiss();
-                            Log.e("PireStore error", error.getMessage());
+                            Log.e("fireStore error", error.getMessage());
                             return;
                         }
                         for (DocumentChange dc : value.getDocumentChanges()) {

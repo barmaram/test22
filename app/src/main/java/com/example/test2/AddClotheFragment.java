@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -107,12 +109,15 @@ public class AddClotheFragment extends Fragment {
         }
         Clothe clothe = new Clothe(Name, Size, Des,id);
 
-        fbs.getFire().collection("Clothe").document("LA")
-                .set(clothe)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        fbs.getFire().collection("Clothe").
+                add(clothe)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        //Log.d(TAG, "DocumentSnapshot successfully written!");
+                    public void onSuccess(DocumentReference documentReference) {
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.FlMain, new FragmentClotheRV());
+                        ft.commit();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
