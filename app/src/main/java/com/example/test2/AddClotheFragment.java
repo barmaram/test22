@@ -108,23 +108,25 @@ public class AddClotheFragment extends Fragment {
             return;
         }
         Clothe clothe = new Clothe(Name, Size, Des,id);
+       try {
+           fbs.getFire().collection("Clothe")
+                   .add(clothe)
+                   .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                       @Override
+                       public void onSuccess(DocumentReference documentReference) {
+                           FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                           ft.replace(R.id.FlMain, new FragmentClotheRV());
+                           ft.commit();
+                       }
+                   }).addOnFailureListener(new OnFailureListener() {
+                       @Override
+                       public void onFailure(@NonNull Exception e) {
 
-        fbs.getFire().collection("Clothe").
-                add(clothe)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.FlMain, new FragmentClotheRV());
-                        ft.commit();
+                       }
+                   });
+        }catch (Exception e){
+           Log.e("ddd", e.getMessage());
+       }
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error writing document", e);
-                    }
-                });
     }
 }

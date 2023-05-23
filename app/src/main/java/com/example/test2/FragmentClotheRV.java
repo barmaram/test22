@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -72,20 +74,6 @@ public class FragmentClotheRV extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-                recyclerView = getView().findViewById(R.id.ClotheRV);
-        /*ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("fetching data .....");
-        progressDialog.show();*/
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        FF = FirebaseFirestore.getInstance();
-        clotheArrayList = new ArrayList<Clothe>();
-        MyAdapter = new Adapter(getActivity(), clotheArrayList);
-        EvenChangeListener();
-        recyclerView.setAdapter(MyAdapter);
-
-
     }
 
 
@@ -97,29 +85,38 @@ public class FragmentClotheRV extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        recyclerView = getView().findViewById(R.id.ClotheRV);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        FF = FirebaseFirestore.getInstance();
+        clotheArrayList = new ArrayList<Clothe>();
+        EvenChangeListener();
+    }
+
     private void EvenChangeListener() {
         FF.collection("Clothe")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
-                        if (error != null) {
-                            if (progressDialog.isShowing())
-                                progressDialog.dismiss();
-                            Log.e("fireStore error", error.getMessage());
-                            return;
-                        }
                         for (DocumentChange dc : value.getDocumentChanges()) {
                             if (dc.getType() == DocumentChange.Type.ADDED) {
                                 clotheArrayList.add(dc.getDocument().toObject(Clothe.class));
                             }
-                            MyAdapter.notifyDataSetChanged();
-                            if (progressDialog.isShowing())
-                                progressDialog.dismiss();
                         }
+                        MyAdapter = new Adapter(getActivity(), clotheArrayList);
+                        recyclerView.setAdapter(MyAdapter);
                     }
                 });
 
 
+    }
+    public void onSuccess(DocumentReference documentReference) {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FlMain, new FragmentHomePage());
+        ft.commit();
     }
 }

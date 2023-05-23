@@ -4,7 +4,7 @@ public class Clothe {
      String name;
      String size;
      String id;
-    String description ;
+     String description ;
     public Clothe(){}
 
     public Clothe(String name, String size, String description, String id) {
