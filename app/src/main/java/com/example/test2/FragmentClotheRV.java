@@ -114,9 +114,6 @@ public class FragmentClotheRV extends Fragment {
 
 
     }
-    public void onSuccess(DocumentReference documentReference) {
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.FlMain, new FragmentHomePage());
-        ft.commit();
-    }
+
+
 }

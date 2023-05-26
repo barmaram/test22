@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="116dp"
+            android:layout_height="71dp"
             android:layout_marginStart="28dp"
             android:layout_marginTop="261dp"
             android:layout_marginEnd="28dp"
@@ -25,8 +25,8 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_width="66dp"
+            android:layout_height="65dp"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="244dp"
             android:src="@drawable/user"

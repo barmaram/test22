@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     holder.Description.setText(clothe.description);
     holder.Id.setText(clothe.id);
     holder.Size.setText(clothe.size);
+
     }
 
     @Override

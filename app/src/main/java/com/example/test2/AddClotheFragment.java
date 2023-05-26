@@ -25,7 +25,7 @@ import com.google.firebase.firestore.DocumentReference;
  */
 public class AddClotheFragment extends Fragment {
     private EditText name, size, des, Id;
-    private Button buttonAdd;
+    private Button buttonAdd,btnView ;
     private FirebaseServices fbs;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -88,6 +88,7 @@ public class AddClotheFragment extends Fragment {
         des = getView().findViewById(R.id.etDesAddFragment);
         buttonAdd = getView().findViewById(R.id.buttonAddFragment);
         fbs = FirebaseServices.getInstance();
+        btnView=getView().findViewById(R.id.btnView);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +108,7 @@ public class AddClotheFragment extends Fragment {
             Toast.makeText(getActivity(), "SOME DATA IS MISSING!!", Toast.LENGTH_SHORT).show();
             return;
         }
-        Clothe clothe = new Clothe(Name, Size, Des,id);
+        Clothe clothe = new Clothe(Name, Size, Des,id,btnView);
        try {
            fbs.getFire().collection("Clothe")
                    .add(clothe)

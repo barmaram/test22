@@ -1,17 +1,21 @@
 package com.example.test2;
 
+import android.widget.Button;
+
 public class Clothe {
      String name;
      String size;
      String id;
      String description ;
+     Button floatingButton;
     public Clothe(){}
 
-    public Clothe(String name, String size, String description, String id) {
+    public Clothe(String name, String size, String description, String id , Button floatingButton ) {
         this.description=description;
         this.name = name;
         this.id=id;
         this.size=size;
+        this.floatingButton=floatingButton;
     }
 
     public String getDescription() {
