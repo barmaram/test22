@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentDetails"/>
+    tools:context=".FragmentDetails">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageClothe"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/image"
+            app:layout_constraintBottom_toTopOf="@+id/tvNameDetails"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinnerSizes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnBuy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvdicDetails" />
+
+        <TextView
+            android:id="@+id/tvNameDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="37dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/tvPriceDetails"
+            app:layout_constraintStart_toStartOf="@+id/tvPriceDetails"
+            app:layout_constraintTop_toBottomOf="@+id/imageClothe" />
+
+        <TextView
+            android:id="@+id/tvPriceDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="31dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/tvdicDetails"
+            app:layout_constraintStart_toStartOf="@+id/tvdicDetails"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameDetails" />
+
+        <TextView
+            android:id="@+id/tvdicDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="39dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/spinnerSizes"
+            app:layout_constraintEnd_toEndOf="@+id/btnBuy"
+            app:layout_constraintTop_toBottomOf="@+id/tvPriceDetails" />
+
+        <Button
+            android:id="@+id/btnBuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="139dp"
+            android:layout_marginBottom="25dp"
+            android:text="Buy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerSizes" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -8,12 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentDetails#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class FragmentDetails extends Fragment {
+   private String path;
+   private FirebaseServices fbs;
+   Clothe clothe;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +33,10 @@ public class FragmentDetails extends Fragment {
 
     public FragmentDetails() {
         // Required empty public constructor
+    }
+    public FragmentDetails(String path)
+    {
+        this.path=path;
     }
 
     /**
@@ -61,4 +72,29 @@ public class FragmentDetails extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_details, container, false);
     }
+
+    private void Eventonchangerep1y () {
+        DocumentReference userRef = fbs.getFire().collection("Comments").document(path);
+        userRef.get()
+                .addOnSuccessListener((DocumentSnapshot documentSnapshot) -> {
+                    if (documentSnapshot.exists()) {
+                        clothe = documentSnapshot.toObject(Clothe.class);
+                    } else {
+                        System.out.println("User document doesn't exist.");
+                    }
+                }).addOnFailureListener(e -> {
+                    System.out.println("Error retrieving user:" + e.getMessage());
+                });
+
+    }
 }
+
+
+
+
+
+
+
+
+
+

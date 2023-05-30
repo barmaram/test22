@@ -31,6 +31,8 @@ import java.util.ArrayList;
 public class FragmentClotheRV extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Clothe> clotheArrayList;
+    ArrayList<String> clotheArrayListpath;
+
     Adapter MyAdapter;
     FirebaseFirestore FF;
     ProgressDialog progressDialog;
@@ -105,9 +107,11 @@ public class FragmentClotheRV extends Fragment {
                         for (DocumentChange dc : value.getDocumentChanges()) {
                             if (dc.getType() == DocumentChange.Type.ADDED) {
                                 clotheArrayList.add(dc.getDocument().toObject(Clothe.class));
+                                clotheArrayListpath.add(dc.getDocument().getId());
+
                             }
                         }
-                        MyAdapter = new Adapter(getActivity(), clotheArrayList);
+                        MyAdapter = new Adapter(getActivity(), clotheArrayList,clotheArrayListpath);
                         recyclerView.setAdapter(MyAdapter);
                     }
                 });

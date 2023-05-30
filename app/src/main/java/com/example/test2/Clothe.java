@@ -5,7 +5,7 @@ import android.widget.Button;
 public class Clothe {
      String name;
      String size;
-     String id;
+     String price;
      String description ;
      Button floatingButton;
     public Clothe(){}
@@ -13,7 +13,7 @@ public class Clothe {
     public Clothe(String name, String size, String description, String id , Button floatingButton ) {
         this.description=description;
         this.name = name;
-        this.id=id;
+        this.price=id;
         this.size=size;
         this.floatingButton=floatingButton;
     }
@@ -26,12 +26,12 @@ public class Clothe {
         this.description = description;
     }
 
-    public String getId() {
-        return id;
+    public String getPrice() {
+        return price;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPrice(String id) {
+        this.price = id;
     }
 
     public String getSize() {
@@ -57,7 +57,7 @@ public class Clothe {
         return "Clothes{" +
                 "name='" + name + '\'' +
                 ", size='" + size + '\'' +
-                ", id=" + id +
+                ", price='" + price +
                 ", description='" + description + '\'' +
                 '}';
     }
