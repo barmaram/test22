@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,7 @@ public class Login extends Fragment {
     private Button buttonLogIn;
     private FirebaseServices fbs;
     private TextView tvForgetPassword;
+    private ImageView user , blackimage;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -86,6 +88,8 @@ public class Login extends Fragment {
         etpassword=getView().findViewById(R.id.etPassword);
         buttonLogIn=getView().findViewById(R.id.buttonLogIn);
         tvForgetPassword=getView().findViewById(R.id.tvForgetPass);
+        blackimage=getView().findViewById(R.id.blackimage);
+         user=getView().findViewById(R.id.imageViewUser);
        tvForgetPassword.setOnClickListener(new View.OnClickListener() {
                                                                   @Override
                                                                   public void onClick(View view) {

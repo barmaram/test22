@@ -7,15 +7,25 @@ public class Clothe {
      String size;
      String price;
      String description ;
-     Button floatingButton;
+     String image;
+
     public Clothe(){}
 
-    public Clothe(String name, String size, String description, String id , Button floatingButton ) {
+    public Clothe(String name, String size, String description, String id , String Image ) {
         this.description=description;
         this.name = name;
         this.price=id;
         this.size=size;
-        this.floatingButton=floatingButton;
+        this.image=Image;
+
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDescription() {
@@ -54,11 +64,12 @@ public class Clothe {
 
     @Override
     public String toString() {
-        return "Clothes{" +
+        return "Clothe{" +
                 "name='" + name + '\'' +
                 ", size='" + size + '\'' +
-                ", price='" + price +
+                ", price='" + price + '\'' +
                 ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

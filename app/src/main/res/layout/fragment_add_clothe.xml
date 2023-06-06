@@ -14,23 +14,23 @@
             android:id="@+id/etDesAddFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="43dp"
             android:ems="10"
             android:hint="description..."
             android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toTopOf="@+id/etNameAddFragment"
-            app:layout_constraintEnd_toEndOf="@+id/etNameAddFragment" />
+            app:layout_constraintBottom_toTopOf="@+id/etSizeAddFragment"
+            app:layout_constraintStart_toStartOf="@+id/etIdAddFragment" />
 
         <EditText
             android:id="@+id/etSizeAddFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="132dp"
             android:ems="10"
             android:hint="size"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="@+id/etDesAddFragment"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/etDesAddFragment"
             app:layout_constraintTop_toBottomOf="@+id/etIdAddFragment" />
 
@@ -38,19 +38,19 @@
             android:id="@+id/etNameAddFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="88dp"
-            android:layout_marginBottom="292dp"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="name..."
             android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/etSizeAddFragment"
+            app:layout_constraintTop_toBottomOf="@+id/etSizeAddFragment" />
 
         <Button
             android:id="@+id/buttonAddFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="51dp"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="#000000"
             android:hint="Id..."
             android:text="Add"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,11 +61,22 @@
             android:id="@+id/etIdAddFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="114dp"
+            android:layout_marginTop="35dp"
             android:ems="10"
-            android:hint="Id..."
+            android:hint="price..."
             android:inputType="number"
-            app:layout_constraintStart_toStartOf="@+id/etSizeAddFragment"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ClotheImage" />
+
+        <ImageView
+            android:id="@+id/ClotheImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="63dp"
+            app:layout_constraintStart_toStartOf="@+id/etIdAddFragment"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

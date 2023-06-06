@@ -1,5 +1,7 @@
 package com.example.test2;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,6 +30,7 @@ public class AddClotheFragment extends Fragment {
     private EditText name, size, des, Id;
     private Button buttonAdd,btnView ;
     private FirebaseServices fbs;
+    private ImageView img;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,6 +93,7 @@ public class AddClotheFragment extends Fragment {
         buttonAdd = getView().findViewById(R.id.buttonAddFragment);
         fbs = FirebaseServices.getInstance();
         btnView=getView().findViewById(R.id.btnView);
+        img=getView().findViewById(R.id.ClotheImage);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,9 +101,42 @@ public class AddClotheFragment extends Fragment {
 
             }
         });
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGalleryAndSelectPhoto();
+
+            }
+        });
     }
 
-    private void AddtoFirestore() {
+      void openGalleryAndSelectPhoto() {
+        // create an instance of the
+        // intent of the type image
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        // pass the constant to compare it
+        // with the returned requestCode
+        startActivityForResult(Intent.createChooser(i,"SELECT_PICTURE"),SELECT_PICTURE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == SELECT_PICTURE) {
+                // Get the url of the image from data
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    // update the preview image in the layout
+                    img.setImageURI(selectedImageUri);
+                }
+            }
+        }
+    }
+        private void AddtoFirestore() {
         String Name, Size, Des,id;
         Name = name.getText().toString();
         Size = size.getText().toString();
@@ -108,7 +146,7 @@ public class AddClotheFragment extends Fragment {
             Toast.makeText(getActivity(), "SOME DATA IS MISSING!!", Toast.LENGTH_SHORT).show();
             return;
         }
-        Clothe clothe = new Clothe(Name, Size, Des,id,btnView);
+        Clothe clothe = new Clothe(Name, Size,Des,id);
        try {
            fbs.getFire().collection("Clothe")
                    .add(clothe)
