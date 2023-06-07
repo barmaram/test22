@@ -20,8 +20,8 @@
             android:drawableTint="#C6B5B5"
             android:text="log in"
             app:iconTint="#1E1D1D"
-            tools:layout_editor_absoluteX="161dp"
-            tools:layout_editor_absoluteY="461dp" />
+            tools:layout_editor_absoluteX="146dp"
+            tools:layout_editor_absoluteY="567dp" />
 
         <EditText
             android:id="@+id/etUserNameLF"
@@ -33,8 +33,8 @@
             android:inputType="textEmailAddress"
             android:textColor="#730D0D"
             android:textColorHint="#97000000"
-            tools:layout_editor_absoluteX="101dp"
-            tools:layout_editor_absoluteY="253dp" />
+            tools:layout_editor_absoluteX="77dp"
+            tools:layout_editor_absoluteY="302dp" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -45,8 +45,8 @@
             android:hint="enter your password..."
             android:inputType="numberPassword"
             android:onClick="ForgotPassTrans"
-            tools:layout_editor_absoluteX="101dp"
-            tools:layout_editor_absoluteY="369dp" />
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="409dp" />
 
         <TextView
             android:id="@+id/tvForgetPass"
@@ -56,16 +56,16 @@
             android:drawableTint="#000000"
             android:text="forgot pass..."
             android:textColorHint="#000000"
-            tools:layout_editor_absoluteX="166dp"
-            tools:layout_editor_absoluteY="509dp" />
+            tools:layout_editor_absoluteX="151dp"
+            tools:layout_editor_absoluteY="627dp" />
 
         <ImageView
             android:id="@+id/imageViewUser"
-            android:layout_width="185dp"
-            android:layout_height="111dp"
+            android:layout_width="216dp"
+            android:layout_height="92dp"
             android:src="@drawable/user"
-            tools:layout_editor_absoluteX="101dp"
-            tools:layout_editor_absoluteY="131dp" />
+            tools:layout_editor_absoluteX="77dp"
+            tools:layout_editor_absoluteY="180dp" />
 
         <ImageView
             android:id="@+id/blackimage"

@@ -27,7 +27,7 @@ import com.google.firebase.firestore.DocumentReference;
  * create an instance of this fragment.
  */
 public class AddClotheFragment extends Fragment {
-    private EditText name, size, des, Id;
+    private EditText name, size, des, price;
     private Button buttonAdd,btnView ;
     private FirebaseServices fbs;
     private ImageView img;
@@ -87,7 +87,7 @@ public class AddClotheFragment extends Fragment {
 
     private void connectComponents() {
         name = getView().findViewById(R.id.etNameAddFragment);
-        Id = getView().findViewById(R.id.etIdAddFragment);
+        price= getView().findViewById(R.id.etIdAddFragment);
         size = getView().findViewById(R.id.etSizeAddFragment);
         des = getView().findViewById(R.id.etDesAddFragment);
         buttonAdd = getView().findViewById(R.id.buttonAddFragment);
@@ -108,7 +108,9 @@ public class AddClotheFragment extends Fragment {
 
             }
         });
-    }
+
+        }
+
 
       void openGalleryAndSelectPhoto() {
         // create an instance of the
@@ -137,16 +139,16 @@ public class AddClotheFragment extends Fragment {
         }
     }
         private void AddtoFirestore() {
-        String Name, Size, Des,id;
+        String Name, Size, Des, Price;
         Name = name.getText().toString();
         Size = size.getText().toString();
         Des = des.getText().toString();
-        id=Id.getText().toString();
+        Price=price.getText().toString();
         if (Name.trim().isEmpty() || Size.trim().isEmpty() || Des.trim().isEmpty()) {
             Toast.makeText(getActivity(), "SOME DATA IS MISSING!!", Toast.LENGTH_SHORT).show();
             return;
         }
-        Clothe clothe = new Clothe(Name, Size,Des,id);
+        Clothe clothe = new Clothe(Name, Size,Des,Price);
        try {
            fbs.getFire().collection("Clothe")
                    .add(clothe)

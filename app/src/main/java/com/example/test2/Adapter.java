@@ -34,12 +34,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Adapter.MyViewHolder holder,int position) {
     Clothe clothe =clotheArrayList.get(position);
 
     holder.Name.setText(clothe.name);
     holder.Description.setText(clothe.description);
-    holder.Id.setText(clothe.id);
+    holder.Id.setText(clothe.price);
     holder.Size.setText(clothe.size);
     holder.btn.setOnClickListener(new View.OnClickListener() {
         @Override

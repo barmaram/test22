@@ -11,10 +11,10 @@ public class Clothe {
 
     public Clothe(){}
 
-    public Clothe(String name, String size, String description, String id , String Image ) {
+    public Clothe(String name, String size, String description, String price , String Image ) {
         this.description=description;
         this.name = name;
-        this.price=id;
+        this.price=price;
         this.size=size;
         this.image=Image;
 
@@ -40,8 +40,8 @@ public class Clothe {
         return price;
     }
 
-    public void setPrice(String id) {
-        this.price = id;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getSize() {
@@ -51,8 +51,6 @@ public class Clothe {
     public void setSize(String size) {
         this.size = size;
     }
-
-
 
     public String getName() {
         return name;
