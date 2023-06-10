@@ -1,7 +1,13 @@
 package com.example.test2;
 
+import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +26,12 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +43,8 @@ public class AddClotheFragment extends Fragment {
     private Button buttonAdd,btnView ;
     private FirebaseServices fbs;
     private ImageView img;
+    int SELECT_PICTURE = 200;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -111,6 +125,29 @@ public class AddClotheFragment extends Fragment {
 
         }
 
+    private String UploadImageToFirebase(){
+        BitmapDrawable drawable = (BitmapDrawable) img.getDrawable();
+        Bitmap Image = drawable.getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Image.compress (Bitmap.CompressFormat .JPEG,100,baos);
+        byte [] data = baos.toByteArray();
+        StorageReference ref =fbs.getStorage().getReference("Clothe image"+ UUID.randomUUID().toString());
+        UploadTask uploadTask =ref.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG,"error with the pic", e); }
+
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                   public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                   }
+
+        });
+        return ref.getPath();
+
+     }
+
+
 
       void openGalleryAndSelectPhoto() {
         // create an instance of the
@@ -138,6 +175,7 @@ public class AddClotheFragment extends Fragment {
             }
         }
     }
+
         private void AddtoFirestore() {
         String Name, Size, Des, Price;
         Name = name.getText().toString();
@@ -148,7 +186,7 @@ public class AddClotheFragment extends Fragment {
             Toast.makeText(getActivity(), "SOME DATA IS MISSING!!", Toast.LENGTH_SHORT).show();
             return;
         }
-        Clothe clothe = new Clothe(Name, Size,Des,Price);
+        Clothe clothe = new Clothe(Name, Size,Des,Price,UploadImageToFirebase());
        try {
            fbs.getFire().collection("Clothe")
                    .add(clothe)

@@ -12,72 +12,52 @@
 
         <ImageView
             android:id="@+id/imageClothe"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="20dp"
+            android:layout_width="379dp"
+            android:layout_height="405dp"
             android:src="@drawable/image"
-            app:layout_constraintBottom_toTopOf="@+id/tvNameDetails"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/spinnerSizes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnBuy"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvdicDetails" />
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="34dp" />
 
         <TextView
             android:id="@+id/tvNameDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="37dp"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/tvPriceDetails"
-            app:layout_constraintStart_toStartOf="@+id/tvPriceDetails"
-            app:layout_constraintTop_toBottomOf="@+id/imageClothe" />
+            tools:layout_editor_absoluteX="229dp"
+            tools:layout_editor_absoluteY="459dp" />
 
         <TextView
             android:id="@+id/tvPriceDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="31dp"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/tvdicDetails"
-            app:layout_constraintStart_toStartOf="@+id/tvdicDetails"
-            app:layout_constraintTop_toBottomOf="@+id/tvNameDetails" />
+            tools:layout_editor_absoluteX="229dp"
+            tools:layout_editor_absoluteY="516dp" />
 
         <TextView
             android:id="@+id/tvdicDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="39dp"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/spinnerSizes"
-            app:layout_constraintEnd_toEndOf="@+id/btnBuy"
-            app:layout_constraintTop_toBottomOf="@+id/tvPriceDetails" />
+            tools:layout_editor_absoluteX="229dp"
+            tools:layout_editor_absoluteY="566dp" />
 
         <Button
             android:id="@+id/btnBuy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="139dp"
-            android:layout_marginBottom="25dp"
             android:backgroundTint="#000000"
             android:text="add to basket"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerSizes" />
+            tools:layout_editor_absoluteX="139dp"
+            tools:layout_editor_absoluteY="658dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="229dp"
+            tools:layout_editor_absoluteY="615dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

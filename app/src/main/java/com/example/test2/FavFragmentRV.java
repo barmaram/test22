@@ -8,19 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentDetails#newInstance} factory method to
+ * Use the {@link FavFragmentRV#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentDetails extends Fragment {
-   private String path;
-   private FirebaseServices fbs;
-   Clothe clothe;
-
+public class FavFragmentRV extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,12 +24,8 @@ public class FragmentDetails extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FragmentDetails() {
+    public FavFragmentRV() {
         // Required empty public constructor
-    }
-    public FragmentDetails(String path)
-    {
-        this.path=path;
     }
 
     /**
@@ -45,11 +34,11 @@ public class FragmentDetails extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentDetails.
+     * @return A new instance of fragment BasketFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentDetails newInstance(String param1, String param2) {
-        FragmentDetails fragment = new FragmentDetails();
+    public static FavFragmentRV newInstance(String param1, String param2) {
+        FavFragmentRV fragment = new FavFragmentRV();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -70,42 +59,7 @@ public class FragmentDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false);
+        return inflater.inflate(R.layout.fragment_fav_rv, container, false);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Connectcomponets();
-    }
-
-    private void Connectcomponets() {
-        DocumentReference userRef = fbs.getFire().collection("Clothe").document(path);
-        userRef.get()
-                .addOnSuccessListener((DocumentSnapshot documentSnapshot) -> {
-                    if (documentSnapshot.exists()) {
-                        clothe = documentSnapshot.toObject(Clothe.class);
-                        Eventonchange();
-                    } else {
-                        System.out.println("User document doesn't exist.");
-                    }
-                }).addOnFailureListener(e -> {
-                    System.out.println("Error retrieving user:" + e.getMessage());
-                });
-    }
-
-    private void Eventonchange () {
-
-
-    }
 }
-
-
-
-
-
-
-
-
-
-
