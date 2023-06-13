@@ -63,7 +63,7 @@
             android:id="@+id/imageViewUser"
             android:layout_width="216dp"
             android:layout_height="92dp"
-            android:src="@drawable/user"
+            android:src="@drawable/userr"
             tools:layout_editor_absoluteX="77dp"
             tools:layout_editor_absoluteY="180dp" />
 
@@ -71,7 +71,7 @@
             android:id="@+id/blackimage"
             android:layout_width="2152dp"
             android:layout_height="152dp"
-            android:src="@drawable/img1"
+            android:src="@drawable/imgg"
             tools:layout_editor_absoluteX="-871dp"
             tools:layout_editor_absoluteY="-22dp" />
 

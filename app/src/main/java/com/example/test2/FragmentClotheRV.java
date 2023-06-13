@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -32,7 +33,7 @@ public class FragmentClotheRV extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Clothe> clotheArrayList;
     ArrayList<String> clotheArrayListpath;
-
+    ImageView Basket;
     Adapter MyAdapter;
     FirebaseFirestore FF;
     ProgressDialog progressDialog;
@@ -91,11 +92,22 @@ public class FragmentClotheRV extends Fragment {
     public void onStart() {
         super.onStart();
         recyclerView = getView().findViewById(R.id.ClotheRV);
+         Basket=getView().findViewById(R.id.BasketImage);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         FF = FirebaseFirestore.getInstance();
         clotheArrayList = new ArrayList<Clothe>();
+        clotheArrayListpath = new ArrayList<String>();
         EvenChangeListener();
+        Basket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FlMain, new BasketFragmentRV());
+                ft.commit();
+
+            }
+        });
     }
 
     private void EvenChangeListener() {

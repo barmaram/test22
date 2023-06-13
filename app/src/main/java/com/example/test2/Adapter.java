@@ -41,23 +41,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder,int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
     Clothe clothe =clotheArrayList.get(position);
+    fbs=FirebaseServices.getInstance();
+    holder.Name.setText(clothe.getName());
 
-    holder.Name.setText(clothe.name);
-    holder.Description.setText(clothe.description);
-    holder.Id.setText(clothe.price);
-    holder.Size.setText(clothe.size);
 
-        holder.btn.setOnClickListener(new View.OnClickListener() {
+    holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override
-
         public void onClick(View v) {
-         AppCompatActivity activity = (AppCompatActivity) context ;
-         activity.getSupportFragmentManager().beginTransaction().replace(R.id.FlMain,new FragmentDetails(clotheArrayListpath.get(position))).addToBackStack(null).commit();
+            AppCompatActivity activity = (AppCompatActivity) context ;
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.FlMain,new FragmentDetails(clotheArrayListpath.get(position))).addToBackStack(null).commit();
         }
-       });
-
+    });
 
         StorageReference storageRef= fbs.getStorage().getReference().child(clothe.getImage());
         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -80,18 +76,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         return clotheArrayList.size();
     }
 
-       public static class MyViewHolder extends RecyclerView.ViewHolder{
-       TextView Name,Id,Size,Description;
-       Button btn;
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
+       TextView Name;
        ImageView ClotheImage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Name=itemView.findViewById(R.id.tvName);
-            Id=itemView.findViewById(R.id.tvId);
-            Size=itemView.findViewById(R.id.tvSize);
-            Description=itemView.findViewById(R.id.tvDescription);
-            btn=itemView.findViewById(R.id.btnView);
+
             ClotheImage=itemView.findViewById(R.id.Clotheimgiteam);
 
         }

@@ -106,7 +106,6 @@ public class AddClotheFragment extends Fragment {
         des = getView().findViewById(R.id.etDesAddFragment);
         buttonAdd = getView().findViewById(R.id.buttonAddFragment);
         fbs = FirebaseServices.getInstance();
-        btnView=getView().findViewById(R.id.btnView);
         img=getView().findViewById(R.id.ClotheImage);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,7 +181,7 @@ public class AddClotheFragment extends Fragment {
         Size = size.getText().toString();
         Des = des.getText().toString();
         Price=price.getText().toString();
-        if (Name.trim().isEmpty() || Size.trim().isEmpty() || Des.trim().isEmpty()) {
+        if (Name.trim().isEmpty() || Size.trim().isEmpty() || Des.trim().isEmpty()|| Price.trim().isEmpty()) {
             Toast.makeText(getActivity(), "SOME DATA IS MISSING!!", Toast.LENGTH_SHORT).show();
             return;
         }

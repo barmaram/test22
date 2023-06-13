@@ -11,53 +11,71 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageClothe"
-            android:layout_width="379dp"
-            android:layout_height="405dp"
+            android:id="@+id/imageClotheDetails"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/image"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="34dp" />
+            app:layout_constraintBottom_toTopOf="@+id/tvNameDetails"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvNameDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="38dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="229dp"
-            tools:layout_editor_absoluteY="459dp" />
+            app:layout_constraintBottom_toTopOf="@+id/tvPriceDetails"
+            app:layout_constraintStart_toStartOf="@+id/tvPriceDetails"
+            app:layout_constraintTop_toBottomOf="@+id/imageClotheDetails" />
 
         <TextView
             android:id="@+id/tvPriceDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="229dp"
-            tools:layout_editor_absoluteY="516dp" />
+            app:layout_constraintBottom_toTopOf="@+id/tvSizeDetails"
+            app:layout_constraintStart_toStartOf="@+id/tvSizeDetails"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameDetails" />
 
         <TextView
-            android:id="@+id/tvdicDetails"
+            android:id="@+id/tvDecDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="23dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="229dp"
-            tools:layout_editor_absoluteY="566dp" />
+            app:layout_constraintBottom_toTopOf="@+id/btnAddDetails"
+            app:layout_constraintEnd_toEndOf="@+id/btnAddDetails"
+            app:layout_constraintTop_toBottomOf="@+id/tvSizeDetails" />
 
         <Button
-            android:id="@+id/btnBuy"
+            android:id="@+id/btnAddDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="118dp"
+            android:layout_marginBottom="25dp"
             android:backgroundTint="#000000"
             android:text="add to basket"
-            tools:layout_editor_absoluteX="139dp"
-            tools:layout_editor_absoluteY="658dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDecDetails" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvSizeDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="229dp"
-            tools:layout_editor_absoluteY="615dp" />
+            app:layout_constraintBottom_toTopOf="@+id/tvDecDetails"
+            app:layout_constraintStart_toStartOf="@+id/tvDecDetails"
+            app:layout_constraintTop_toBottomOf="@+id/tvPriceDetails" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

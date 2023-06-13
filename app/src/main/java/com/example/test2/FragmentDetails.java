@@ -1,15 +1,26 @@
 package com.example.test2;
 
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.storage.StorageReference;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +30,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 public class FragmentDetails extends Fragment {
    private String path;
    private FirebaseServices fbs;
+    private TextView Name, Size, Des, Price;
+    private Button ButtonAdd;
+
+    private ImageView ClotheImg;
    Clothe clothe;
 
 
@@ -80,24 +95,65 @@ public class FragmentDetails extends Fragment {
     }
 
     private void Connectcomponets() {
-        DocumentReference userRef = fbs.getFire().collection("Clothe").document(path);
-        userRef.get()
-                .addOnSuccessListener((DocumentSnapshot documentSnapshot) -> {
-                    if (documentSnapshot.exists()) {
-                        clothe = documentSnapshot.toObject(Clothe.class);
-                        Eventonchange();
-                    } else {
-                        System.out.println("User document doesn't exist.");
-                    }
-                }).addOnFailureListener(e -> {
-                    System.out.println("Error retrieving user:" + e.getMessage());
-                });
-    }
-
-    private void Eventonchange () {
-
+        Name = getView().findViewById(R.id.tvNameDetails);
+        Price = getView().findViewById(R.id.tvPriceDetails);
+        Size = getView().findViewById(R.id.tvSizeDetails);
+        Des = getView().findViewById(R.id.tvDecDetails);
+        ButtonAdd = getView().findViewById(R.id.btnAddDetails);
+        fbs=FirebaseServices.getInstance();
+        ButtonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BasketFragmentRVTrans();
+            }
+        });
+        Eventonchange();
 
     }
+
+    private void BasketFragmentRVTrans() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FlMain, new BasketFragmentRV());
+        ft.commit();
+    }
+
+    private void Eventonchange()
+    {
+            DocumentReference userRef = fbs.getFire().collection("Clothe").document(path);
+            userRef.get()
+                    .addOnSuccessListener((DocumentSnapshot documentSnapshot) -> {
+                        if (documentSnapshot.exists()) {
+                            clothe = documentSnapshot.toObject(Clothe.class);
+                            hearme();
+                        } else {
+                            System.out.println("User document doesn't exist.");
+                        }
+                    }).addOnFailureListener(e -> {
+                        System.out.println("Error retrieving user:" + e.getMessage());
+                    });
+    }
+
+    private void hearme() {
+        Name.setText(clothe.getName());
+        Size.setText(clothe.getSize());
+        Price.setText(clothe.getPrice());
+        Des.setText(clothe.getDescription());
+        StorageReference storageRef= fbs.getStorage().getReference().child(clothe.getImage());
+        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getContext())
+                        .load(uri)
+                        .into(ClotheImg);
+            }
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
+    }
+
 }
 
 
