@@ -33,7 +33,7 @@ public class FragmentDetails extends Fragment {
     private TextView Name, Size, Des, Price;
     private Button ButtonAdd;
 
-    private ImageView ClotheImg;
+    ImageView ClotheImg;
    Clothe clothe;
 
 
@@ -100,6 +100,7 @@ public class FragmentDetails extends Fragment {
         Size = getView().findViewById(R.id.tvSizeDetails);
         Des = getView().findViewById(R.id.tvDecDetails);
         ButtonAdd = getView().findViewById(R.id.btnAddDetails);
+        ClotheImg=getView().findViewById(R.id.imageClotheDetails);
         fbs=FirebaseServices.getInstance();
         ButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
