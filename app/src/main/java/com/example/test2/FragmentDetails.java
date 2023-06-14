@@ -135,10 +135,10 @@ public class FragmentDetails extends Fragment {
     }
 
     private void hearme() {
-        Name.setText(clothe.getName());
-        Size.setText(clothe.getSize());
-        Price.setText(clothe.getPrice());
-        Des.setText(clothe.getDescription());
+        Name.setText("Name: "+clothe.getName());
+        Size.setText("Size: "+clothe.getSize());
+        Price.setText("Price: "+clothe.getPrice());
+        Des.setText("Description: "+clothe.getDescription());
         StorageReference storageRef= fbs.getStorage().getReference().child(clothe.getImage());
         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
