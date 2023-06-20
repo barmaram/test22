@@ -31,4 +31,11 @@ public User(){
         BasketArrayList = basketArrayList;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", BasketArrayList=" + BasketArrayList +
+                '}';
+    }
 }

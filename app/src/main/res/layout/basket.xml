@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="349dp"
+        android:layout_height="464dp"
+        android:layout_marginVertical="6dp"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/Clotheimgiteam"
+            android:layout_width="match_parent"
+            android:layout_height="301dp"
+            app:srcCompat="@drawable/userr" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name:"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="skirt"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/Basketimage"
+            android:layout_width="110dp"
+            android:layout_height="72dp"
+            app:srcCompat="@drawable/basket" />
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

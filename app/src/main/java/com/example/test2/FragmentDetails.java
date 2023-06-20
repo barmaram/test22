@@ -32,9 +32,9 @@ public class FragmentDetails extends Fragment {
    private FirebaseServices fbs;
     private TextView Name, Size, Des, Price;
     private Button ButtonAdd;
-
-    ImageView ClotheImg;
+    ImageView ClotheImg ,BackButton;
    Clothe clothe;
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -99,6 +99,7 @@ public class FragmentDetails extends Fragment {
         Price = getView().findViewById(R.id.tvPriceDetails);
         Size = getView().findViewById(R.id.tvSizeDetails);
         Des = getView().findViewById(R.id.tvDecDetails);
+        BackButton=getView().findViewById(R.id.BackButton);
         ButtonAdd = getView().findViewById(R.id.btnAddDetails);
         ClotheImg=getView().findViewById(R.id.imageClotheDetails);
         fbs=FirebaseServices.getInstance();
@@ -153,6 +154,12 @@ public class FragmentDetails extends Fragment {
             public void onFailure(@NonNull Exception e) {
             }
         });
+   BackButton.setOnClickListener(new View.OnClickListener() {
+       @Override
+       public void onClick(View v) {
+           getFragmentManager().popBackStack();
+       }
+   });
     }
 
 }

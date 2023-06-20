@@ -2,12 +2,21 @@ package com.example.test2;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.core.Query;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -23,6 +32,8 @@ public class BasketFragmentRV extends Fragment {
     Adapter ClotheAdapter;
     FirebaseServices FBS;
     User user;
+    ArrayList<String> ClothePathArrayList , finalPath;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,6 +74,64 @@ public class BasketFragmentRV extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FBS = FirebaseServices.getInstance();
+        Query query = FBS.getFire().collection("Users").whereEqualTo( "email", FBS.getAuth().getCurrentUser().getEmail());
+        query.get().addOnCompleteListener (task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot querySnapshot = task.getResult();
+                        for (QueryDocumentSnapshot document : querySnapshot) {
+                            this.user = document.toObject(User.class);
+                            continueto();
+                        }
+                    } else {
+                        Exception e = task.getException();
+                        e.printStackTrace();
+
+                    }
+                });
+
+        recyclerView = getView().findViewById(R.id.BasketRV);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        FBS= FirebaseServices.getInstance();
+        BasketArrayList=new ArrayList<Clothe>();
+        ClothePathArrayList=new ArrayList<String>();
+        EventChangeListener();
+    }
+
+    private void continueto() {
+        ArrayList<String> paths = user.getBasketArrayList();
+        int i = 0;
+        while (paths.size() > i) {
+            DocumentReference ClotheRef = FBS.getFire().collection("Clothes").document(paths.get(i));
+            ClotheRef.get()
+                    .addOnCompleteListener((DocumentSnapshot documentSnapshot)  -> {
+                        if (documentSnapshot.exists()) {
+                            Clothe clothe = documentSnapshot.toObject(Clothe.class);
+                            BasketArrayList.add(clothe);
+                            finalPath.add(documentSnapshot.getId());
+                            EventChangeListener();
+                        }
+                        }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+            i++;
+        }
+    }
+    private void EventChangeListener() {
+        if (finalPath.size()==user.getBasketArrayList().size()){
+            ClotheAdapter = new Adapter(getContext(),BasketArrayList,finalPath);
+            recyclerView.setAdapter(ClotheAdapter);
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
