@@ -12,12 +12,21 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/BasketRV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="411dp"
+            android:layout_height="603dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            tools:layout_editor_absoluteX="-7dp" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <Button
+            android:id="@+id/BasketBuyBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:text="Buy"
+            tools:layout_editor_absoluteX="145dp"
+            tools:layout_editor_absoluteY="618dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
