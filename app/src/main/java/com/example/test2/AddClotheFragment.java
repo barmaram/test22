@@ -186,8 +186,7 @@ public class AddClotheFragment extends Fragment {
             return;
         }
         Clothe clothe = new Clothe(Name, Size,Des,Price,UploadImageToFirebase());
-       try {
-           fbs.getFire().collection("Clothe")
+        fbs.getFire().collection("Clothe")
                    .add(clothe)
                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                        @Override
@@ -202,9 +201,6 @@ public class AddClotheFragment extends Fragment {
 
                        }
                    });
-        }catch (Exception e){
-           Log.e("ddd", e.getMessage());
-       }
 
     }
 }

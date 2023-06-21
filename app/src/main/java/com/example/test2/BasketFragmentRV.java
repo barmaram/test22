@@ -11,14 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.core.Query;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -93,7 +94,6 @@ public class BasketFragmentRV extends Fragment {
 
                     }
                 });
-
         recyclerView = getView().findViewById(R.id.BasketRV);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -108,20 +108,17 @@ public class BasketFragmentRV extends Fragment {
         int i = 0;
         while (paths.size() > i) {
             DocumentReference ClotheRef = FBS.getFire().collection("Clothes").document(paths.get(i));
-            ClotheRef.get()
-                    .addOnCompleteListener((DocumentSnapshot documentSnapshot)  -> {
-                        if (documentSnapshot.exists()) {
-                            Clothe clothe = documentSnapshot.toObject(Clothe.class);
-                            BasketArrayList.add(clothe);
-                            finalPath.add(documentSnapshot.getId());
-                            EventChangeListener();
-                        }
-                        }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                        }
-                    });
+            ClotheRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.getResult().exists()) {
+                        Clothe clothe = task.getResult().toObject(Clothe.class);
+                        BasketArrayList.add(clothe);
+                        finalPath.add(task.getResult().getId());
+                        EventChangeListener();
+                    }
+                }
+            });
             i++;
         }
     }

@@ -20,17 +20,24 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    FirebaseServices fbs;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.FlMain, new AddClotheFragment());
-        ft.commit();
-
-
+        fbs=FirebaseServices.getInstance();
+        if (fbs.getAuth().getCurrentUser()==null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.FlMain, new Login());
+            ft.commit();
+        }
+        else{
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.FlMain, new FragmentClotheRV());
+            ft.commit();
+        }
     }
 
 
