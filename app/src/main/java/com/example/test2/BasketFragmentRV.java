@@ -36,7 +36,7 @@ public class BasketFragmentRV extends Fragment {
     FirebaseServices FBS;
     User user;
     ArrayList<String> ClothePathArrayList , finalPath;
-    Button btn ;
+    Button btn;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -110,14 +110,17 @@ public class BasketFragmentRV extends Fragment {
         FBS= FirebaseServices.getInstance();
         BasketArrayList=new ArrayList<Clothe>();
         ClothePathArrayList=new ArrayList<String>();
-        EventChangeListener();
+
+
     }
+
 
     private void continueto() {
         ArrayList<String> paths = user.getBasketArrayList();
+        finalPath=new ArrayList<String>();
         int i = 0;
         while (paths.size() > i) {
-            DocumentReference ClotheRef = FBS.getFire().collection("Clothes").document(paths.get(i));
+            DocumentReference ClotheRef = FBS.getFire().collection("Clothe").document(paths.get(i));
             ClotheRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -144,11 +147,13 @@ public class BasketFragmentRV extends Fragment {
         ft.replace(R.id.FlMain, new CardFragment());
         ft.commit();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_basket_rv, container, false);
     }
+
 
 }

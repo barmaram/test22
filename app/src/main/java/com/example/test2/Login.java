@@ -30,6 +30,7 @@ public class Login extends Fragment {
     private TextView tvForgetPassword;
 
 
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -87,13 +88,15 @@ public class Login extends Fragment {
         etUserName=getView().findViewById(R.id.etUserNameLF);
         etpassword=getView().findViewById(R.id.etPassword);
         buttonLogIn=getView().findViewById(R.id.buttonLogIn);
+        fbs=FirebaseServices.getInstance();
         tvForgetPassword=getView().findViewById(R.id.tvForgetPass);
+
        tvForgetPassword.setOnClickListener(new View.OnClickListener() {
-                                                                  @Override
-                                                                  public void onClick(View view) {
-                                                                      ForgotPassTrans();
-                                                                  }
-                                                              });
+           @Override
+           public void onClick(View view) {
+               ForgotPassTrans();
+           }
+       });
                 buttonLogIn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -104,7 +107,9 @@ public class Login extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
-
+                                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                            ft.replace(R.id.FlMain, new AddClotheFragment());
+                                            ft.commit();
                                         } else {
 
                                         }

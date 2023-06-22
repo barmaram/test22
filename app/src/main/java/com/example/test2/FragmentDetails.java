@@ -20,7 +20,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,21 +108,44 @@ public class FragmentDetails extends Fragment {
         ButtonAdd = getView().findViewById(R.id.btnAddDetails);
         ClotheImg=getView().findViewById(R.id.imageClotheDetails);
         fbs=FirebaseServices.getInstance();
+
         ButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BasketFragmentRVTrans();
+                Query query = fbs.getFire().collection("Users").whereEqualTo("email", fbs.getAuth().getCurrentUser().getEmail());
+                query.get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot querySnapshot = task.getResult();
+
+
+                        for (QueryDocumentSnapshot document : querySnapshot) {
+                            ArrayList<String> favo =document.toObject(User.class).getBasketArrayList();
+                            favo.add(path);
+                            document.getReference().update("basketArrayList", favo)
+                                    .addOnSuccessListener(aVoid -> {
+                                        System.out.println("ArrayList updated successfully.");
+                                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                        ft.replace(R.id.FlMain, new BasketFragmentRV());
+                                        ft.commit();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        System.out.println("Error updating ArrayList: " + e.getMessage());
+                                    });
+                        }
+                    } else {
+                        Exception e = task.getException();
+                        e.printStackTrace();
+                    }
+                });
+
+
             }
         });
+
         Eventonchange();
 
     }
 
-    private void BasketFragmentRVTrans() {
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.FlMain, new BasketFragmentRV());
-        ft.commit();
-    }
 
     private void Eventonchange()
     {

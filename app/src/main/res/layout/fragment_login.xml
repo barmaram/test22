@@ -16,64 +16,79 @@
             android:id="@+id/buttonLogIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:backgroundTint="#000000"
             android:drawableTint="#C6B5B5"
             android:text="log in"
             app:iconTint="#1E1D1D"
-            tools:layout_editor_absoluteX="146dp"
-            tools:layout_editor_absoluteY="567dp" />
+            app:layout_constraintBottom_toTopOf="@+id/tvForgetPass"
+            app:layout_constraintEnd_toEndOf="@+id/tvForgetPass"
+            app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
         <EditText
             android:id="@+id/etUserNameLF"
             android:layout_width="223dp"
-            android:layout_height="74dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="66dp"
             android:backgroundTint="#000000"
             android:ems="10"
             android:hint="enter your username..."
             android:inputType="textEmailAddress"
-            android:textColor="#730D0D"
+            android:textColor="#000000"
             android:textColorHint="#97000000"
-            tools:layout_editor_absoluteX="77dp"
-            tools:layout_editor_absoluteY="302dp" />
-
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="218dp"
-            android:layout_height="71dp"
-            android:backgroundTint="#000000"
-            android:ems="10"
-            android:hint="enter your password..."
-            android:inputType="numberPassword"
-            android:onClick="ForgotPassTrans"
-            tools:layout_editor_absoluteX="75dp"
-            tools:layout_editor_absoluteY="409dp" />
+            app:layout_constraintBottom_toTopOf="@+id/etPassword"
+            app:layout_constraintStart_toStartOf="@+id/imageViewUser"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewUser" />
 
         <TextView
             android:id="@+id/tvForgetPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="66dp"
+            android:layout_marginEnd="66dp"
+            android:layout_marginBottom="85dp"
             android:backgroundTint="#000000"
             android:drawableTint="#000000"
             android:text="forgot pass..."
             android:textColorHint="#000000"
-            tools:layout_editor_absoluteX="151dp"
-            tools:layout_editor_absoluteY="627dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/etUserNameLF"
+            app:layout_constraintStart_toStartOf="@+id/etPassword"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLogIn" />
 
         <ImageView
             android:id="@+id/imageViewUser"
             android:layout_width="216dp"
-            android:layout_height="92dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginBottom="30dp"
             android:src="@drawable/userr"
-            tools:layout_editor_absoluteX="77dp"
-            tools:layout_editor_absoluteY="180dp" />
+            app:layout_constraintBottom_toTopOf="@+id/etUserNameLF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/blackimage" />
 
         <ImageView
             android:id="@+id/blackimage"
             android:layout_width="2152dp"
-            android:layout_height="152dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="49dp"
             android:src="@drawable/imgg"
-            tools:layout_editor_absoluteX="-871dp"
-            tools:layout_editor_absoluteY="-22dp" />
+            app:layout_constraintBottom_toTopOf="@+id/imageViewUser"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="-871dp" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="226dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="75dp"
+            android:ems="10"
+            android:hint="enter your password..."
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@+id/buttonLogIn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etUserNameLF" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

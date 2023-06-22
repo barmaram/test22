@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.firebase.firestore.DocumentChange;
@@ -37,6 +38,8 @@ public class FragmentClotheRV extends Fragment {
     Adapter MyAdapter;
     FirebaseFirestore FF;
     ProgressDialog progressDialog;
+    Button sighOut;
+    FirebaseServices fbs;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -94,8 +97,20 @@ public class FragmentClotheRV extends Fragment {
         recyclerView = getView().findViewById(R.id.ClotheRV);
          Basket=getView().findViewById(R.id.BasketImage);
         recyclerView.setHasFixedSize(true);
+        sighOut=getView().findViewById(R.id.sighOutbtn);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         FF = FirebaseFirestore.getInstance();
+        fbs = FirebaseServices.getInstance();
+        sighOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fbs.getAuth().signOut();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FlMain, new SignUpp());
+                ft.commit();
+
+            }
+        });
         clotheArrayList = new ArrayList<Clothe>();
         clotheArrayListpath = new ArrayList<String>();
         EvenChangeListener();

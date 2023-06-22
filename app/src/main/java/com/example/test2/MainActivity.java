@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         fbs=FirebaseServices.getInstance();
         if (fbs.getAuth().getCurrentUser()==null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.FlMain, new Login());
+            ft.replace(R.id.FlMain, new SignUpp());
             ft.commit();
         }
         else{

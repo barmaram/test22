@@ -13,7 +13,7 @@
 
         <ImageView
             android:id="@+id/BasketImage"
-            android:layout_width="121dp"
+            android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="5dp"
@@ -21,6 +21,7 @@
             android:src="@drawable/basket"
             app:layout_constraintBottom_toTopOf="@+id/ClotheRV"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sighOutbtn"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -31,7 +32,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BasketImage" />
+            app:layout_constraintTop_toBottomOf="@+id/sighOutbtn" />
+
+        <Button
+            android:id="@+id/sighOutbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="146dp"
+            android:layout_marginBottom="2dp"
+            android:text="Sigh out"
+            app:layout_constraintBottom_toTopOf="@+id/ClotheRV"
+            app:layout_constraintEnd_toStartOf="@+id/BasketImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
