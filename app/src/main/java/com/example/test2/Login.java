@@ -108,7 +108,7 @@ public class Login extends Fragment {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
                                             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                                            ft.replace(R.id.FlMain, new AddClotheFragment());
+                                            ft.replace(R.id.FlMain, new FragmentClotheRV());
                                             ft.commit();
                                         } else {
 

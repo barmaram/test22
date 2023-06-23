@@ -9,52 +9,84 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#C68040"
         android:foregroundTint="#000000">
 
-        <Button
-            android:id="@+id/buttonSignUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="63dp"
-            android:backgroundTint="#000000"
-            android:text="sign up"
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="70dp"
+            android:src="@drawable/img0"
+            app:layout_constraintBottom_toTopOf="@+id/etEmailFragmentS"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etPassWordFS" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/etPassWordFS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="99dp"
+            android:layout_marginBottom="121dp"
             android:ems="10"
             android:hint="enter a password..."
             android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/etEmailFragmentS"
             app:layout_constraintTop_toBottomOf="@+id/etEmailFragmentS" />
 
         <EditText
             android:id="@+id/etEmailFragmentS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="151dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginEnd="85dp"
+            android:layout_marginBottom="40dp"
             android:ems="10"
             android:hint="enter an username..."
             android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="@+id/etPassWordFS"
-            app:layout_constraintStart_toStartOf="@+id/etPassWordFS"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/etPassWordFS"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <Button
+            android:id="@+id/buttonSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:backgroundTint="#000000"
+            android:text="sign up"
+            app:layout_constraintBottom_toTopOf="@+id/TvSignUp"
+            app:layout_constraintStart_toStartOf="@+id/TvSignUp"
+            app:layout_constraintTop_toBottomOf="@+id/etPassWordFS" />
 
         <TextView
             android:id="@+id/TvSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="104dp"
+            android:layout_marginBottom="39dp"
             android:drawableTint="#FF0000"
             android:text="you already have an account"
             android:textColor="#000000"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonSignUp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginBottom="244dp"
+            android:text="Welcome To ModaLine"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
