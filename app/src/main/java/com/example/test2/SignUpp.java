@@ -126,10 +126,14 @@ public class SignUpp extends Fragment {
             public void onClick(View view) {
                 String user = UserName.getText().toString();
                 String pass = password.getText().toString();
-                if(!isValidEmailId(user) )
+                if(!isValidEmailId(user) ) {
                     Toast.makeText(getActivity(), "The Email isn't valid", Toast.LENGTH_SHORT).show();
-                if(!isValidPassword(pass) )
+                    return;
+                }
+                if(!isValidPassword(pass) ) {
                     Toast.makeText(getActivity(), "The password isn't valid", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 fbs.getAuth().createUserWithEmailAndPassword(user, pass).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

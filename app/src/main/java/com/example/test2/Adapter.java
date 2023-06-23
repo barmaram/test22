@@ -24,10 +24,20 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     Context context;
+    boolean y;
     FirebaseServices fbs;
     ArrayList<Clothe> clotheArrayList;
     ArrayList<String> clotheArrayListpath;
-    public Adapter(Context context, ArrayList<Clothe> clotheArrayList,ArrayList<String> clotheArrayListpath) {
+    BasketFragmentRV basketFragmentRV;
+
+    public Adapter(Context context,  ArrayList<Clothe> clotheArrayList, ArrayList<String> clotheArrayListpath,BasketFragmentRV basketFragmentRV) {
+        this.context = context;
+        this.clotheArrayList = clotheArrayList;
+        this.clotheArrayListpath = clotheArrayListpath;
+        this.basketFragmentRV=basketFragmentRV;
+    }
+
+    public Adapter(Context context, ArrayList<Clothe> clotheArrayList, ArrayList<String> clotheArrayListpath) {
         this.context = context;
         this.clotheArrayList = clotheArrayList;
         this.clotheArrayListpath=clotheArrayListpath;
@@ -45,8 +55,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     Clothe clothe =clotheArrayList.get(position);
     fbs=FirebaseServices.getInstance();
     holder.Name.setText(clothe.getName());
-
-
     holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -69,6 +77,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             public void onFailure(@NonNull Exception e) {
             }
         });
+       if (basketFragmentRV==null){
+            ViewGroup ParentView=(ViewGroup) holder.erase.getParent();
+            ParentView.removeView(holder.erase);
+            holder.erase.setVisibility(View.GONE);
+        }
+        else holder.erase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                basketFragmentRV.removebasket(clotheArrayListpath.get(position));
+            }
+        });
     }
 
     @Override
@@ -78,14 +97,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
        TextView Name;
-       ImageView ClotheImage;
+       ImageView ClotheImage,erase;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Name=itemView.findViewById(R.id.tvName);
 
             ClotheImage=itemView.findViewById(R.id.Clotheimgiteam);
-
+            erase=itemView.findViewById(R.id.erase);
         }
     }
 

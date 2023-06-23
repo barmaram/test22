@@ -12,6 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/blackimage"
+            android:layout_width="2152dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="49dp"
+            android:src="@drawable/imgg"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewUser"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="-871dp" />
+
         <Button
             android:id="@+id/buttonLogIn"
             android:layout_width="wrap_content"
@@ -66,16 +76,6 @@
             app:layout_constraintBottom_toTopOf="@+id/etUserNameLF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/blackimage" />
-
-        <ImageView
-            android:id="@+id/blackimage"
-            android:layout_width="2152dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="49dp"
-            android:src="@drawable/imgg"
-            app:layout_constraintBottom_toTopOf="@+id/imageViewUser"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="-871dp" />
 
         <EditText
             android:id="@+id/etPassword"

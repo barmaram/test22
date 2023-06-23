@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +38,7 @@ public class BasketFragmentRV extends Fragment {
     User user;
     ArrayList<String> ClothePathArrayList , finalPath;
     Button btn;
+    ImageView Back;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -83,22 +85,19 @@ public class BasketFragmentRV extends Fragment {
     public void onStart() {
         super.onStart();
         FBS = FirebaseServices.getInstance();
-        Query query = FBS.getFire().collection("Users").whereEqualTo( "email", FBS.getAuth().getCurrentUser().getEmail());
-        query.get().addOnCompleteListener (task -> {
-                    if (task.isSuccessful()) {
-                        QuerySnapshot querySnapshot = task.getResult();
-                        for (QueryDocumentSnapshot document : querySnapshot) {
-                            this.user = document.toObject(User.class);
-                            continueto();
-                        }
-                    } else {
-                        Exception e = task.getException();
-                        e.printStackTrace();
+        start();
 
-                    }
-                });
         recyclerView = getView().findViewById(R.id.BasketRV);
         btn=getView().findViewById(R.id.BasketBuyBtn);
+        Back=getView().findViewById(R.id.Back);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.FlMain, new FragmentClotheRV());
+                ft.commit();
+            }
+        });
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,10 +113,27 @@ public class BasketFragmentRV extends Fragment {
 
     }
 
+    private void start() {
+        Query query = FBS.getFire().collection("Users").whereEqualTo( "email", FBS.getAuth().getCurrentUser().getEmail());
+        query.get().addOnCompleteListener (task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot querySnapshot = task.getResult();
+                for (QueryDocumentSnapshot document : querySnapshot) {
+                    this.user = document.toObject(User.class);
+                    continueto();
+                }
+            } else {
+                Exception e = task.getException();
+                e.printStackTrace();
+            }
+        });
+    }
+
 
     private void continueto() {
         ArrayList<String> paths = user.getBasketArrayList();
         finalPath=new ArrayList<String>();
+        BasketArrayList=new ArrayList<Clothe>();
         int i = 0;
         while (paths.size() > i) {
             DocumentReference ClotheRef = FBS.getFire().collection("Clothe").document(paths.get(i));
@@ -134,10 +150,13 @@ public class BasketFragmentRV extends Fragment {
             });
             i++;
         }
+        if (user.getBasketArrayList().isEmpty()){
+            EventChangeListener();
+        }
     }
     private void EventChangeListener() {
         if (finalPath.size()==user.getBasketArrayList().size()){
-            ClotheAdapter = new Adapter(getContext(),BasketArrayList,finalPath);
+            ClotheAdapter = new Adapter(getContext(),BasketArrayList,finalPath,this);
             recyclerView.setAdapter(ClotheAdapter);
         }
     }
@@ -155,5 +174,29 @@ public class BasketFragmentRV extends Fragment {
         return inflater.inflate(R.layout.fragment_basket_rv, container, false);
     }
 
+    public void removebasket(String path) {
+        Query query = FBS.getFire().collection("Users").whereEqualTo("email", FBS.getAuth().getCurrentUser().getEmail());
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot querySnapshot = task.getResult();
+                for (QueryDocumentSnapshot document : querySnapshot) {
+                    ArrayList<String> favo =document.toObject(User.class).getBasketArrayList();
+                    favo.remove(path);
+                    document.getReference().update("basketArrayList", favo)
+                            .addOnSuccessListener(aVoid -> {
+                                System.out.println("ArrayList updated successfully.");
+                                start();
+                            })
+                            .addOnFailureListener(e -> {
+                                System.out.println("Error updating ArrayList: " + e.getMessage());
+                            });
+                }
+            } else {
+                Exception e = task.getException();
+                e.printStackTrace();
+            }
+        });
+
+    }
 
 }
